@@ -18,11 +18,15 @@
     <% if @stock %>
       <div id="stock-lookup-results" class="well results-block">
         <strong>Ticker: </strong> <%= @stock.ticker %>
-        <strong>Company: </strong> <%= @stock.ticker %>
-        <strong>Current Price: </strong> <%= @stock.ticker %>
+        <strong>Company: </strong> <%= @stock.name %>
+        <strong>Current Price: </strong> <%= @stock.price %>
       </div>
     
     <% end %>
+    
+    <div id="stock-lookup-errors">
+      
+    </div>
     
     
 </div>
