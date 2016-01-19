@@ -1,49 +1,53 @@
+
 <div id="stock-lookup">
-  <h3> Search for Stocks</h3>
-  </br>
-    <%= form_tag search_stocks_path, remote: true, method: :get, id: 'stock-lookup-form' do %>
+  <h3>Search for Stocks</h3>
+  <%= form_tag search_stocks_path, remote: true, method: :get, id: 'stock-lookup-form' do %>
     <div class="form-group row no-padding text-center col-md-12">
+      
       <div class="col-md-10">
-        <%= text_field_tag :stock, params[:stock], placeholder: "Stock Ticker Symbol",
-                          autofocus: true, class: 'form-control search-box input-lg' %>
+        <%= text_field_tag :stock, params[:stock], placeholder: "Stock ticker symbol", autofocus: true,
+                                                          class: 'form-control search-box input-lg' %>
       </div>
+      
       <div class="col-md-2">
-        <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %> 
-          <i class="fa fa-search"></i> Find a Stock
+        <%= button_tag(type: :submit, class: 'btn btn-lg btn-success') do %>
+          <i class="fa fa-search"></i> Find Stock
         <% end %>
       </div>
+      
     </div>
-    <% end %>
-    
-    <%= render 'common/spinner' %>
-    
-    <% if @stock %>
-      <div id="stock-lookup-results" class="well results-block">
-        <strong>Ticker: </strong> <%= @stock.ticker %>
-        <strong>Company: </strong> <%= @stock.name %>
-        <strong>Current Price: </strong> <%= @stock.price %>
-        <% if current_user.can_add_stock?(@stock.ticker) %>
-          <%= link_to "Add to Portfolio", user_stocks_path(user: current_user, stock_ticker: @stock.ticker,
-          stock_id: @stock.id ? @stock.id : ''), class: 'btn btn-xs btn-success', method: :post %>
-        <% else %>
+  <% end %>
+  
+  <!--Spinner-->
+  <%= render 'common/spinner' %>
+  
+  <% if @stock %>
+    <div id="stock-lookup-results" class="well results-block">
+      <strong>Ticker: </strong><%= @stock.ticker %>
+      <strong>Name: </strong><%= @stock.name %>
+      <strong>Current Price: </strong><%= @stock.price %>
+      <% if current_user.can_add_stock?(@stock.ticker) %>
+        
+        <%= link_to "Add to My Stocks", user_stocks_path(user: current_user, 
+                stock_ticker: @stock.ticker, stock_id: @stock.id ? @stock.id : ''),
+                class: "btn btn-success", method: :post %>
+                
+      <% else %>
+        
         <span class="label label-default">
-          <%= @stock.name %> could not be added to your portfolio because
+          <%= @stock.name %> cannot be added because you have already added 
           <% if !current_user.under_stock_limit? %>
-          you cannot save more than 10 stocks.
-          <% end %>
-          <% if current_user.stock_already_added?(@stock.ticker) %>
-          you have already saved this ticker.
+            10 stocks.
+          <% elsif !current_user.stock_already_added?(@stock.ticker) %>
+            it.
           <% end %>
         </span>
         
-        <% end %>
-      </div>
-    
-    <% end %>
-    
-    <div id="stock-lookup-errors">
-      
+      <% end %>
     </div>
-    
-    
+  <% end %>
+  
+  <div id="stock-lookup-errors">
+  </div>
+  
 </div>

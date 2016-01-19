@@ -23,37 +23,37 @@ class UserStocksController < ApplicationController
 
   # POST /user_stocks
   # POST /user_stocks.json
-  
-  # new_from_lookup method defined in user.rb, others in stock.rb
   def create
+    
+    # new_from_lookup and find_by_ticker method defined in models/stock.rb
+    #
     if params[:stock_id].present?
       @user_stock = UserStock.new(stock_id: params[:stock_id], user: current_user)
     else
       stock = Stock.find_by_ticker(params[:stock_ticker])
-      if stock 
+      if stock
         @user_stock = UserStock.new(user: current_user, stock: stock)
       else
         stock = Stock.new_from_lookup(params[:stock_ticker])
         if stock.save
           @user_stock = UserStock.new(user: current_user, stock: stock)
-        else 
+        else
           @user_stock = nil
-          flash[:error] = "Stock cannot be found."
+          flash[:error] = "Stock is not available."
         end
       end
     end
-
-
-
+    
     respond_to do |format|
       if @user_stock.save
-        format.html { redirect_to my_portfolio_path, notice: "Stock #{@user_stock.stock.ticker} was added to your portfolio."}
+        format.html { redirect_to my_portfolio_path, notice: "Stock #{@user_stock.stock.ticker} was added successfully." }
         format.json { render :show, status: :created, location: @user_stock }
       else
         format.html { render :new }
         format.json { render json: @user_stock.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /user_stocks/1
@@ -75,7 +75,7 @@ class UserStocksController < ApplicationController
   def destroy
     @user_stock.destroy
     respond_to do |format|
-      format.html { redirect_to my_portfolio_path, notice: "The stock was successfully deleted from your portfolio." }
+      format.html { redirect_to my_portfolio_path, notice: 'Stock was removed from portfolio successfully.' }
       format.json { head :no_content }
     end
   end
@@ -91,3 +91,4 @@ class UserStocksController < ApplicationController
       params.require(:user_stock).permit(:user_id, :stock_id)
     end
 end
+
