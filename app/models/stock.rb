@@ -23,9 +23,18 @@ class Stock < ActiveRecord::Base
     closing_price = StockQuote::Stock.quote(ticker).close
     return "#{closing_price} (Closing)" if closing_price
     
+    ask_realtime = StockQuote::Stock.quote(ticker).ask_realtime
+    return "#{ask_realtime} (Realtime)" if ask_realtime
+    
     opening_price = StockQuote::Stock.quote(ticker).open
     return "#{opening_price} (Opening)" if opening_price
     'Unavailable'
+  end
+  
+  # Change Realtime Method
+  def change_realtime
+    change_realtime = StockQuote::Stock.quote(ticker).change_realtime
+    return change_realtime if change_realtime
   end
   
 end

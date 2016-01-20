@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160119172438) do
+ActiveRecord::Schema.define(version: 20160120141319) do
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id"
@@ -24,8 +24,9 @@ ActiveRecord::Schema.define(version: 20160119172438) do
     t.string   "ticker"
     t.string   "name"
     t.decimal  "last_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.decimal  "change_realtime"
   end
 
   create_table "user_stocks", force: :cascade do |t|

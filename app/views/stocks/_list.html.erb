@@ -3,7 +3,8 @@
     <tr>
       <th>Name</th>
       <th>Symbol</th>
-      <th>Current Price</th>
+      <th>Price</th>
+      <th>Change</th>
       <% if @user.id == current_user.id %>
         <th>Actions</th>
       <% end %>
@@ -15,6 +16,13 @@
         <td><%= user_stock.name %></td>
         <td><%= user_stock.ticker %></td>
         <td><%= user_stock.price %></td>
+        <% if user_stock.change_realtime.to_i > 0 %>
+          <td><i class="fa fa-arrow-up positive-color"></i> <%= user_stock.change_realtime %></td>
+        <% elsif user_stock.change_realtime.to_i < 0 %>
+          <td><i class="fa fa-arrow-down negative-color"></i> <%= user_stock.change_realtime %></td>
+        <% else %>
+          <td>Unavailable</td>
+        <% end %>
         <% if @user.id == current_user.id %>
           <td>
             <%= link_to 'Delete', user_stock_path(user_stock), method: :delete, 
