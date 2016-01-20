@@ -32,8 +32,13 @@ class UsersController < ApplicationController
       flash[:error] = " An error occured saving this friend."
       
     end
-    
   end
+  
+  def show
+    @user = User.find(params[:id])
+    @user_stocks = @user.stocks
+  end
+
   
   
 end
