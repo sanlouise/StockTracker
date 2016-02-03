@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   end
   
   def under_stock_limit?
-    (user_stocks.count < 10)
+    (user_stocks.count < 15)
   end
   
   def stock_already_added?(ticker_symbol)
