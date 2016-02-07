@@ -2,8 +2,10 @@
   <div class="center jumbotron">
     <h1 class="homepage-text">StockTracker</h1>
     <% if !current_user %>
-      <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg btn-xlarge" %> 
-      <div class="small-home">It's free!</div>
+      <div class="text-center">
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg btn-xlarge" %> 
+        <div class="small-home">It's free!</div>
+      </div>
     <% else %>
     <h2 class="welcome-text text-center">Welcome, <%= @user.first_name %></h2>
     <% end %>
