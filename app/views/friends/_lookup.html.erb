@@ -25,15 +25,18 @@
     <div id="friend-lookup-results" class="well results-block col-md-10">
       <table class="search-results-table col-md-12">
         <tbody>
+           <th><strong>Name: </strong></th>
+           <th><strong>Email: </strong></th>
+           <th><strong>Profile: </strong></th>
           <% @users.each do |user| %>
             <tr>
-              <td><strong>Name: </strong><%= user.full_name %></td>
-              <td><strong>Email: </strong><%= user.email %></td>
-              <td><strong>Profile: </strong><%= link_to "View Profile", user_path(user), class: "btn btn-primary" %></td>
+              <td><%= user.full_name %></td>
+              <td><%= user.email %></td>
+              <td><%= link_to "View Profile", user_path(user), class: "btn btn-primary btn-xs" %></td>
               <% if current_user.not_friends_with?(user.id) %>
-                <td><%= link_to "Add Friend", add_friend_path(user: current_user, friend: user), class: "btn btn-success", method: :post %></td>
+                <td><%= link_to "Add Friend", add_friend_path(user: current_user, friend: user), class: "btn btn-success btn-xs", method: :post %></td>
               <% else %>
-                <span class="label label-primary">Friend</span>
+                <td>  </td>
               <% end %>
             </tr>
           <% end %>

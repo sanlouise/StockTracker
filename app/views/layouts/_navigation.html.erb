@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav col-md-6">
+        <ul class="nav navbar-nav col-md-6 text-center">
           <li><%= link_to "My Portfolio", my_portfolio_path  %></li>
           <li><%= link_to "My Profile", edit_registration_path(current_user)  %></li>
           <li><%= link_to "My Friends", my_friends_path  %></li>
@@ -18,7 +18,7 @@
             <i class="fa fa-user"></i>
             <%= current_user.full_name.present? ? current_user.full_name : current_user.email %>
           </li>
-          <li class="col-md-4 logout"><%= link_to("logout", destroy_user_session_path, 
+          <li class="col-md-4 logout"><%= link_to("Log Out", destroy_user_session_path, 
 class: "btn btn-xs btn-danger", method: :delete) %></li>
         </ul>
       </div>
