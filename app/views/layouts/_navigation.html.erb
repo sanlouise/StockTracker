@@ -1,6 +1,6 @@
 <div class="navbar navbar-default navbar-static-top">
   <div class="container">
-    <%= link_to 'StockTracker', root_path, class: "navbar-brand" %>
+    <%= link_to 'StockTracker', root_path, class: "navbar-brand", id: "logo" %>
     <% if current_user %>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
         <span class="icon-bar"></span>
@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <div class="navbar-collapse collapse navbar-responsive-collapse">
-        <ul class="nav navbar-nav col-md-6 text-center">
+        <ul class="nav navbar-nav text-center">
           <li><%= link_to "My Portfolio", my_portfolio_path  %></li>
           <li><%= link_to "My Profile", edit_registration_path(current_user)  %></li>
           <li><%= link_to "My Friends", my_friends_path  %></li>
