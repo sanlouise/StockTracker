@@ -32,9 +32,9 @@ class Stock < ActiveRecord::Base
   end
   
   # Change Realtime Method
-  def change_realtime
+  def self.change_realtime
     change_realtime = StockQuote::Stock.quote(ticker).change_realtime
-    return change_realtime if change_realtime
+    return "#{change_realtime}" if change_realtime
   end
   
 end
